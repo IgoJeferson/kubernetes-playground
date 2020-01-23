@@ -1,0 +1,31 @@
+## Kubernetes Web UI
+
+- Kubernetes is great, but sometimes a web is is useful, too
+    - Called the "Dashboard UI"
+- Runs on your Kubernetes master(s)
+- Accessible directly if you have direct network connectivity directly to
+your cluster/master(s) (unlikely in production situations)
+    - kubeclt can create a proxy/tunnel for you in situations you do not
+    $ kubectl proxy
+
+
+- Provides a variety of views for nearly anything in your Kubernetes cluster
+- Allows update, deletion, and creation of nearly anything in your Kubernetes cluster
+- Accesses the same APIS as kubeclt
+
+- On some Kubernetes clusters the Dashboard UI is pre-installed, on some it is not (many cloud providers'
+Kubernetes services include it)
+
+- Installing the Dashboard
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc2/aio/deploy/recommended.yaml
+
+- Accessing the Dashboard (the most fool-proof way)
+$ kubectl proxy
+
+- Navigate to "http://localhost:8001/ui" in your web browser
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+
+
+## For more information, access: https://github.com/kubernetes/dashboard

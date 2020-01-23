@@ -1,0 +1,30 @@
+## Scalling Commands
+
+$ kubectl scale --replicas=4 deployment/tomcat-deployment 
+ 
+$ kubectl expose deployment tomcat-deployment --type=NodePort
+$ kubectl expose deployment tomcat-deployment --type=LoadBalancer --port=8080 --target-port=8080 --name tomcat-load-balancer
+ 
+$ kubectl describe services tomcat-load-balancer
+
+
+## Deployment Commands
+
+- List deployments
+$ kubectl get deployments
+
+- View status of deployment roll outs
+$ kubectl rollout status
+
+Ex: kubectl rollout status deployment tomcat-deployment
+
+- Set the image of the deployment
+$ kubectl set image
+
+Ex: kubectl set image deployment/tomcat-deployment tomcat=tomcat:9.0.1
+
+- View the history of a rollout, including previous revisions
+$ kubectl rollout history
+
+Ex: kubectl rollout history deployment/tomcat-deployment
+Ex: kubectl rollout history deployment/tomcat-deployment --revision=2

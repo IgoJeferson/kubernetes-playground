@@ -1,0 +1,25 @@
+## Health Checks
+
+- Kubernetes has two types of health checks to ascertain two different things
+    - Readiness Probes: To determine when a Pod is "ready" (e.g after it has started to see when it's 
+    ready and has loaded what it needs to internally in the image and is ready to take requests from
+    external services)
+
+    - Liveness Probes: To determine when a Pod is "healthy" or "unhealthy" after it has become ready
+
+- Whether they are a readiness or liveness probe they can be use a variety of methods to ascertain a 
+container's status
+    - Successfull HTTP or TCP request to the Pod
+    - Successfull command execution on the Pod
+
+- Probes are defined on the container in a Deployment or Pod specification
+
+# Making it real: A Healthy Tomcat
+
+- A readiness probe will check to make sure the Pod has started and is ready to begin taking requests
+- A liveness probe on the Tomcat deployment will help us ensure the containers continue to be able to 
+accept and service requests without error is a reasonable amount of time
+
+
+- To apply 
+$ kubectl apply -f deployment.yaml

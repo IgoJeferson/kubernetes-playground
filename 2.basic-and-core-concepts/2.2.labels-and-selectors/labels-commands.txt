@@ -1,0 +1,13 @@
+
+
+- List nodes
+$ kubectl get nodes
+
+- To add a label to node called minikube
+$ kubectl label node minikube storageType=ssd
+
+- To confirme that the label was added
+$ kubectl describe node minikube
+
+# Next, check inside the deployment.yaml that we have a nodeSelector. This tells kubernentes is that when
+it's selecting nodes to deploy Tomcat it should look for a label name storageType with the value SSD.
