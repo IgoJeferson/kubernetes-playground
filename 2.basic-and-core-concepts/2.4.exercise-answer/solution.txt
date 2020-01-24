@@ -1,0 +1,15 @@
+## A possible solution
+
+- Use kubectl run to run the default mongo image
+$ kubectl run mongo-exercise-1 --image=mongo --port=27017
+
+- Use kubectl scale to scale the deployment to 4 replicas
+$ kubectl scale --replicas=4 deployment/mongo-exercise-1
+
+## Other possible solutions
+
+- Write a deployment.yaml file, use kubectl apply, & use kubectl expose to expose a service
+
+- Write a deployment.yaml file & a service.yaml file and use kubectl apply on both
+
+- Use a kubernetes package manager like helm to handle the work for you

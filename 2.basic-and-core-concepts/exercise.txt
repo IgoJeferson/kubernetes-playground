@@ -1,0 +1,10 @@
+## Your task
+
+- Use what you've learned to deploy and scale MongoDB (a popular NoSQL datastore)
+
+- Success criteria:
+    The current version of MongoDB is running on your Kubernetes cluster with four replicas
+
+- A few hints:
+    MongoDB listens on port 27017
+    Officially supported MongoDB Docker images are available on Docker Hub

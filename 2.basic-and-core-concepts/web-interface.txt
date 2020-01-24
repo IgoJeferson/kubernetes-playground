@@ -22,10 +22,19 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0
 - Accessing the Dashboard (the most fool-proof way)
 $ kubectl proxy
 
-- Navigate to "http://localhost:8001/ui" in your web browser
-
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+- Navigate to "http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/" in your web browser
 
 
+## Getting token with kubectl
+
+There are many Service Accounts created in Kubernetes by default. All with different access permissions. 
+In order to find any token, that can be used to login we'll use kubectl:
+
+- Check existing secrets in kubernetes-dashboard namespace
+$ kubectl -n kubernetes-dashboard get secret
+
+$ kubectl -n kubernetes-dashboard describe secrets kubernetes-dashboard-token-{code}
+
+-- We can now use printed token to login to Dashboard. 
 
 ## For more information, access: https://github.com/kubernetes/dashboard
