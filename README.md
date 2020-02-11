@@ -2,7 +2,7 @@
 
  Files and deployments used in studies of kubernetes + docker + minikube
 
-## Prerequisitos
+## Prerequisites
 
 * Start with a Linux or Mac OS X machine with a hypervisor installed
 
@@ -63,19 +63,25 @@ Use browser download link from releases [link](https://kubernetes.io/docs/tasks/
 ## First app using Kubernetes and minikube
 
 *  Deploy a sample Kubernetes "deployment" to your local minikbue
+
 ```kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080```
 
 * Expose this deployment to an external network
+
 ```kubectl expose deployment hello-minikube  --type=NodePort```
 
 * List the "pods" of this deployment
+
 ```kubectl get pod```
 
 * Access the sample service
 ```curl $(minikube service hello-minikube --url)```
 
+
 * Delete the deployment
+
 ```kubectl delete deployment hello-minikube```
 
 * Stop minikube
+
 ```minikube stop```
