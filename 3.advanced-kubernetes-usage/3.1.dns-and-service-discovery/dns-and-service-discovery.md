@@ -1,4 +1,4 @@
-# DNS in Kubernetes
+## DNS in Kubernetes
 
 - DNS, or the Domain Name Service, is a cornerstone service of the Internet
 - It translates names into IP addresses
@@ -6,7 +6,7 @@
 - Kubernetes configures kubelets to tell individual containers to use the DNS service's IP to resolve
 DNS names
 
-# DNS as Service Discovery in Kubernetes
+## DNS as Service Discovery in Kubernetes
 
 - Every Service in your Kubernetes cluster gets a DNS name
 - Kubernetes has a specific & consistent nomenclature for deciding what this DNS name is
@@ -21,7 +21,7 @@ General from of DNS Name for Non-headless Services
     - Or, combine two above and expect services at well-known DNS names and allow environment variables
     to override ("convertion over configuration")
 
-# A note on Namespaces
+## A note on Namespaces
 
 - Kubernetes allows you to define "namespaces" - they allow  you to separate your cluster into smaller
 logical clusters
@@ -29,7 +29,7 @@ logical clusters
     - Kubernetes DNS names will include this namespace in the assigned DNS name
 - Namespaces are helpful mostly for large clusters with many users across many teams & projects - using the default namespace is fine if this logical separation is not required.
 
-# A Practical example
+## A Practical example
 
 - Consider deploing WordPress & MySQL to a Kubernetes cluster
 - WordPress & MySQL are both separate deployments
@@ -41,17 +41,17 @@ hostname in the same namespace
     - This follows the "convention over configuration" best practive
 
 
-# MySQL
+## MySQL
 
 - We'll deploy MySQL in a deployment named "wordpress-mysql"
 - Once deployed, it will run MySQL5.6 on port 3306 on the wordpress-mysql hostname
 
-# WordPress
+## WordPress
 
 - We'll deplyo WordPress named as "wordpress"
 - We'll configure MySQL to be available on the "wordpress-mysql" hostname and tell Wordpress to expect it there
 
-# Process
+## Process
 
 1. Deploy Mysql
 
@@ -64,6 +64,7 @@ hostname in the same namespace
 3. To validate and access the wordpress page
 
 ``` kubectl get services wordpress ```
+
 ``` minikube service wordpress --url ``` copy the url returned in this command into your preffered browser
 
-- (which Kubernetes apiVersion should I use?)[https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html]
+- [which Kubernetes apiVersion should I use?](https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html)
