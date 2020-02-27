@@ -48,3 +48,53 @@
 
 * We'll need something bigger than  minikube
 * Let's set up a kubernetes cluster on AWS
+
+## Setting up a Kubernetes Cluster On AWS
+
+* Amazon offers a managed Kubernetes service called Elastic Kubernetes Service
+    * Managed master redundancy/High Availability
+    * Highly automated setup
+* We'll use "kops", a suite of software provided by kubernetes mainteiners to to a bit more manual work to set up our own cluster
+
+Steps:
+
+1. Download and install "kops" 
+
+https://github.com/kubernetes/kops
+
+2. Download, configure, and install the "aws" command line tool suite
+
+https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
+
+* After the download, use ``` aws configure ```, to configure your access key
+
+3. Create an AWS S3 bucket as a "state store"
+
+``` aws s3api create-bucket --bucket igo-jeferson-basic-k8s-and-kops-demo-bucket --region us-east-1 --create-bucket-configuration LocationConstraint=EU ```
+
+4. Create the cluster using kops
+
+``` export KOPS_STATE_STORE=s3://igo-jeferson-basic-k8s-and-kops-demo-bucket ```
+
+Obs: If you don't have a default public key, create one with ssh-keygen command, and inform kops:
+
+``` kops create cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --zones us-east-1a ```
+
+``` kops create secret --name igo-jeferson-basic-k8s-and-kops-demo.k8s.local sshpublickey admin -i ~/.ssh/id_rsa_igojeferson.pub ```
+
+``` kops update cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --yes ```
+
+
+Wait until all the resources become ready, this process can take almost 5 minutes, and follow the suggestions commands, like this:
+
+ * validate cluster: ``` kops validate cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local ```
+ * list nodes:  ``` kubectl get nodes --show-labels  ```
+ * ssh to the master:  
+ ``` ssh -i ~/.ssh/id_rsa admin@ec2-3-91-53-125.compute-1.amazonaws.com  ```
+ * the admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS.
+ * read about installing addons at: https://github.com/kubernetes/kops/blob/master/docs/operations/addons.md.
+
+
+** After finish your tests, remember to delete the cluster using kops, to ensure all resources are released and you are not charged.
+
+ ``` kops delete cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --yes ```
