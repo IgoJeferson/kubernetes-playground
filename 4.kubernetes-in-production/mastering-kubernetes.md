@@ -66,7 +66,7 @@ https://github.com/kubernetes/kops
 
 https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
 
-* After the download, use ``` aws configure ```, to configure your access key
+* After the download, use ``` aws configure ``` to configure your access key
 
 3. Create an AWS S3 bucket as a "state store"
 
@@ -74,13 +74,19 @@ https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
 
 4. Create the cluster using kops
 
+* Just a reference to our S3 Bucket for kop use
+
 ``` export KOPS_STATE_STORE=s3://igo-jeferson-basic-k8s-and-kops-demo-bucket ```
 
-Obs: If you don't have a default public key, create one with ssh-keygen command, and inform kops:
+* Kops create command, without the parameter '--yes', because we don't wan't provide the resources yet.
 
 ``` kops create cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --zones us-east-1a ```
 
+* Obs: If you don't have a default public key, create one with ssh-keygen command, and inform kops:
+
 ``` kops create secret --name igo-jeferson-basic-k8s-and-kops-demo.k8s.local sshpublickey admin -i ~/.ssh/id_rsa_igojeferson.pub ```
+
+* Update the cluster, now referencing the secret ssh key and using --yes to create all resources in AWS.
 
 ``` kops update cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --yes ```
 
@@ -91,10 +97,13 @@ Wait until all the resources become ready, this process can take almost 5 minute
  * list nodes:  ``` kubectl get nodes --show-labels  ```
  * ssh to the master:  
  ``` ssh -i ~/.ssh/id_rsa admin@ec2-3-91-53-125.compute-1.amazonaws.com  ```
- * the admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS.
+ * the admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS. *(To access the master you will need to take the public IP in the aws console EC2 configuration)
  * read about installing addons at: https://github.com/kubernetes/kops/blob/master/docs/operations/addons.md.
 
 
-** After finish your tests, remember to delete the cluster using kops, to ensure all resources are released and you are not charged.
+* To check the master items: 
+``` kubectl get deployments -n kube-system ```
+
+* *After finish your tests, remember to delete the cluster using kops, to ensure all resources are released and you are not charged.*
 
  ``` kops delete cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --yes ```
