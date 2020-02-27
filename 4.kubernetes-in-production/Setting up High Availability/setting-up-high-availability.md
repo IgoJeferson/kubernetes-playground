@@ -18,7 +18,7 @@
 
 * kops create command, the main difference between our last version is that we specify 3 different zones for our worker and master nodes, and informe the paramenter node code with value 3.
 
-``` kops create cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --zones us-east-1a,us-east-1b,us-east-2b --node-count 3 --master-zones us-east-1a,us-east-1b,us-east-2b us-eas ```
+``` kops create cluster igo-jeferson-basic-k8s-and-kops-demo.k8s.local --zones us-east-1a,us-east-1b,us-east-2b --node-count 3 --master-zones us-east-1a,us-east-1b,us-east-2b ```
 
 * Obs: If you don't have a default public key, create one with ssh-keygen command, and inform kops:
 
