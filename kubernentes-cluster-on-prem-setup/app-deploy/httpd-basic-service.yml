@@ -10,15 +10,3 @@ spec:
     - name: my-apache-port
       port: 8080
       targetPort: 80
-
-# After that 
-
-
-
-# Outside the cluster when can test  (examples, the public IP and port probably will change)
-# - curl 18.224.215.111:32360
-# - curl 3.21.125.167:32360
-
-# Inside the cluster we need to use the private ip
-# curl 10.0.3.189:32360
-# curl 10.0.3.88:32360
